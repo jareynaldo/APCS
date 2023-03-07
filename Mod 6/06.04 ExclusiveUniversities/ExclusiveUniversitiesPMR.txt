@@ -1,0 +1,127 @@
++ I had a fun time with this project as now we are adding a much higer level of 
+complexety and working with object arrays was lots of fun. 
+
+- I had a hard time with the actual formating of the string itself but other than 
+that it was mostly smooth sailing. Only other problem I had was with setting up the 
+loop to make the arrays for me but i'm glad i did it since it saved me a lot of time. 
+
++ I learned how to work with object arrays, setting up loops to autoinject content 
+into an array, and furthered my skills in formating strings in java. 
+
+
+
+
+/**
+ * Attempting to use arrays as a maker of objects.
+ *
+ * @author Jose Reynaldo
+ * @version 13/02/23
+ */
+public class ExclusiveUniversities {
+    private String myUniversity;
+    private int myAccepted;
+    private int myTotalApps;
+    private double myPercentIn;
+    private String myHowElite;
+
+    public ExclusiveUniversities(String name, int accepted, int totalApp) {
+        myUniversity = name;
+        myAccepted = accepted;
+        myTotalApps = totalApp;
+        myPercentIn = ((double) accepted) / ((double) totalApp);
+        myHowElite = "";
+        howElite();
+    }
+
+    public void setUni(String name) {
+        myUniversity = name;
+    }
+
+    public void setAccepted(int accepted) {
+        myAccepted = accepted;
+    }
+
+    public void setTotalApps(int apps) {
+        myTotalApps = apps;
+    }
+
+    public void setPercentIn(double percentIn) {
+        myPercentIn = percentIn;
+    }
+
+    public void setHowElite(String eliteLevel) {
+        myHowElite = eliteLevel;
+    }
+
+    //
+    public String getUni() {
+        return myUniversity;
+    }
+
+    public int getAccepted() {
+        return myAccepted;
+    }
+
+    public int getTotalApps() {
+        return myTotalApps;
+    }
+
+    public double getPercentIn() {
+        return myPercentIn;
+    }
+
+    public String getHowElite() {
+        return myHowElite;
+    }
+
+    public void howElite() {
+        if (myPercentIn > .70) {
+            myHowElite = "Not Elite";
+        } else if (myPercentIn > .50) {
+            myHowElite = "Not very Elite";
+        } else if (myPercentIn > .30) {
+            myHowElite = "Pretty Elite";
+        } else {
+            myHowElite = "Extremely Elite";
+        }
+
+    }
+
+    public String toString() {
+        return String.format("%7s %10d %10d %10.0f %20s ", myUniversity, myTotalApps, myAccepted, myPercentIn * 100,
+                myHowElite);
+    }
+}
+
+
+/**
+ * To test the Universties class
+ *
+ * @author Jose Reynaldo
+ * @version 13/02/23
+ */
+
+public class ExclusiveUniversitiesTester {
+    public static void main(String[] args) {
+
+        String[] schoolNames = { "Harvard", "UF", "FIU", "UCF", "USF", "MIT", "Yale" };
+        int[] accepted = { 1984, 14939, 10502, 21580, 17753, 1337, 1434 };
+        int[] applied = { 61221, 48193, 16406, 47957, 36986, 33767, 37495 };
+
+        ExclusiveUniversities[] unis = new ExclusiveUniversities[7];
+        for (int i = 0; i < accepted.length; i++) {
+            unis[i] = new ExclusiveUniversities(schoolNames[i], accepted[i], applied[i]);
+
+        }
+        // System.out.println(unis[0].howElite());
+
+        System.out.printf("%7s %12s %9s %12s %17s %n", "Name", "Accepted", "Applied", "% Accepted",
+                "How Elite");
+        System.out.println("=============================================================");
+
+        for (ExclusiveUniversities p : unis) {
+            System.out.println(p);
+        }
+
+    }
+}

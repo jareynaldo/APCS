@@ -1,0 +1,83 @@
+(+)I was able to sucsesfully use an if else if strucutre inside of a program. I 
+had a fun time working with this slightly more complicated program as i was able 
+to incorportate many different aspects into a single program. 
+
+(-) The biggest challenge in this program was when i tried to shorten the double 
+values that i had recived after i did my calculations. I tried several different 
+methods which included converting into string and using "substring" but ended 
+up deciding that simply implimenting the method i added was the simpelest solution.
+
++ This project taught me to include many different concepts together into one whole 
+cohesive program. I was able to learn how to work with if else if statements in java
+and sucsesfully implimented the challenge that was asked of me. 
+
+
+
+
+/**
+ * This program illustrates the use of the if-else-if structure 
+ * and detirmens a persons bmi based on gathered infromation.
+ *
+ * @author Jose Reynaldo
+ * @version 11/07/22
+ */
+import java.util.Scanner;
+
+public class bmiV2 {
+
+    public static double shortenInt(double x) {
+        int temp = (int) (x * 100.0);
+        double shortDouble = ((double) temp) / 100.0;
+        return shortDouble;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        // Gather input
+        System.out.println("Please enter your name (first last):");
+        String fullName = in.nextLine();
+        // String lastName = in.nextLine();
+
+        System.out.println("Please enter your weight in pounds:");
+        int weightInAmerican = in.nextInt();
+        double weight = weightInAmerican * 0.453592;
+
+        System.out.println("Please enter your height in feet and inches (6 2):");
+        int heightInFeet = in.nextInt();
+        int heightInInInchest = in.nextInt();
+        double heightInAmerican = heightInInInchest + (12 * heightInFeet);
+
+        double inRestOfWorld = heightInAmerican * 0.0254;
+
+        double bmi = weight / (inRestOfWorld * inRestOfWorld);
+
+        double heightInMeters = shortenInt(inRestOfWorld);
+        double publishableBMI = shortenInt(bmi);
+        double publishableWeight = shortenInt(weight);
+
+        String catagory = "";
+
+        if (bmi < 18.5)
+            catagory = "Underweight";
+
+        else if (bmi <= 24.9)
+            catagory = "Normal or Healthy Weight";
+        else if (bmi <= 29.9)
+            catagory = "Overweight";
+        else
+            catagory = "Obese";
+
+        System.out.println("Body Mass Index Calculator");
+        System.out.println("==========================");
+
+        System.out.println("Name: " + fullName);
+        System.out.println("Height (m): " + heightInMeters);
+        System.out.println("Weight ()Kg: " + publishableWeight);
+        System.out.println("BMI: " + publishableBMI);
+        System.out.println("Catagory: " + catagory);
+
+    }
+}
+

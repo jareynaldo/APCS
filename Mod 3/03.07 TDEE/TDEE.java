@@ -1,0 +1,79 @@
+
+/**
+ * This program illustrates the use of the
+ * AND logical operator to determine a persoms TDEE.
+ *
+ * @author Jose Reynaldo
+ * @version 11/12/2022
+ */
+import java.util.Scanner;
+
+public class TDEE {
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Please enter your name:  "); // ask for required info
+        String name = in.nextLine();
+
+        System.out.print("Please enter your BMR:  ");
+        String bmr = in.nextLine();
+
+        System.out.print("Please enter your gender (M/F): ");
+        String gender = in.nextLine();
+        System.out.println();
+
+        System.out.println("Select Your Activity Level"); // print options
+        System.out.println("[A] Resting (Sleeping, Reclining)");
+        System.out.println("[B] Sedentary (Restricted Mobility)");
+        System.out.println("[C] Light (Sitting, Standing)");
+        System.out.println("[D] Moderate (Light Manual labor, Dancing, Riding Bike)");
+        System.out.println("[E] Very Active (Team Sports, Hard Manual Labor)");
+        System.out.println("[F] Extremely Active (Full-time Athlete, Heavy Manual Labor)");
+        System.out.println();
+
+        System.out.print("Enter the letter of correspoinding to your activity level: ");
+        String choice = in.next();
+        if (choice.equalsIgnoreCase("A") || choice.equalsIgnoreCase("B") || choice.equalsIgnoreCase("C")// logic to make
+                                                                                                        // sure it's the
+                                                                                                        // correct input
+                || choice.equalsIgnoreCase("D") || choice.equalsIgnoreCase("E") || choice.equalsIgnoreCase("F")) {
+
+        } else {
+            System.out.print("Sice we could not determine a valid option we have ended the program.");
+        }
+
+        // logic for correct activity factor
+        double activityFactor = 0;
+        if (choice.equalsIgnoreCase("A")) {
+            activityFactor = 1;
+        } else if (choice.equalsIgnoreCase("B")) {
+            activityFactor = 1.3;
+        } else if (choice.equalsIgnoreCase("C") && gender.equalsIgnoreCase("M")) {
+            activityFactor = 1.6;
+        } else if (choice.equalsIgnoreCase("C") && !gender.equalsIgnoreCase("M")) {
+            activityFactor = 1.5;
+        } else if (choice.equalsIgnoreCase("D") && gender.equalsIgnoreCase("M")) {
+            activityFactor = 1.7;
+        } else if (choice.equalsIgnoreCase("D") && !gender.equalsIgnoreCase("M")) {
+            activityFactor = 1.6;
+        } else if (choice.equalsIgnoreCase("E") && gender.equalsIgnoreCase("M")) {// whole process could cerantly be cut
+                                                                                  // down and optemized
+            activityFactor = 2.1;
+        } else if (choice.equalsIgnoreCase("E") && !gender.equalsIgnoreCase("M")) {
+            activityFactor = 1.9;
+        } else if (choice.equalsIgnoreCase("F") && gender.equalsIgnoreCase("M")) {
+            activityFactor = 2.4;
+        } else if (choice.equalsIgnoreCase("F") && !gender.equalsIgnoreCase("M")) {
+            activityFactor = 2.2;
+        }
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Your Results: ");
+        System.out.println("Name: " + name + "\t" + "Gender: " + gender.toUpperCase());
+        System.out.println("BMR: " + bmr + " calories" + "\t" + "Activity Factor: " + activityFactor);
+        System.out.println("TDEE: " + (Integer.parseInt(bmr) * activityFactor) + " calories");
+
+    }
+}
