@@ -1,0 +1,211 @@
++ I was able to succesfully create all of the classes required 
+and correctly made inheritance work. 
+
+- There was no difficult part of this project. 
+
+(+) Here i learned how to work with inheritance in java. Using code 
+in a single class and extending it to multiple, saving me a lot of 
+time and effort.
+
+
+
+/**
+ * Creates Desert Objects
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+
+public class Desert extends Terrain {
+    private int totalWater;
+
+    public Desert(int l, int w, int totalWater) {
+        super(l, w);
+        this.totalWater = totalWater;
+    }
+
+    public int getWater() {
+        return totalWater;
+    }
+
+    public void setWater(int totalWater) {
+        this.totalWater = totalWater;
+    }
+
+    public String desertPrinter() {
+        return "Deserts " + toString() + " and " + totalWater + " inches of rainfall";
+    }
+
+    public String toStringDes() {
+        return toString() + " and " + totalWater + " inches of rainfall";
+    }
+
+}
+
+/**
+ * Creates Forrest Objects
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+
+public class Forest extends Terrain {
+
+    private int numOfTrees;
+
+    public Forest(int l, int w, int newTrees) {
+        super(l, w);
+        this.numOfTrees = newTrees;
+    }
+
+    public int getTrees() {
+        return numOfTrees;
+    }
+
+    public void setTress(int newTrees) {
+        numOfTrees = newTrees;
+    }
+
+    public String forrestPrinter() {
+        return "Forrest " + toString() + " and " + numOfTrees + " Trees";
+    }
+}
+
+
+/**
+ * Runs and prints all of the other classes
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+public class GameTerrainTester {
+    public static void main(String[] args) {
+        Terrain one = new Terrain(15, 6);
+        Forest two = new Forest(62, 63, 125);
+        Mountain three = new Mountain(256, 260, 8);
+        WinterMountain four = new WinterMountain(64, 52, 111, 2);
+        Desert five = new Desert(300, 342, 2);
+        MountainDesert six = new MountainDesert(310, 308, 1, 3500);
+
+        System.out.println(one.getTerrainSize());
+        System.out.println(two.forrestPrinter());
+        System.out.println(three.mountainPrinter());
+        System.out.println(four.winterPrinter());
+        System.out.println(five.desertPrinter());
+        System.out.println(six.mountDesertPrinter());
+
+    }
+}
+
+/**
+ * Creates Mountan objects through the Terrain class
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+
+public class Mountain extends Terrain {
+    private int numOfMount;
+
+    public Mountain(int l, int w, int numOfMount) {
+        super(l, w);
+        this.numOfMount = numOfMount;
+    }
+
+    public int getMountain() {
+        return numOfMount;
+    }
+
+    public void setMountain(int newMounts) {
+        numOfMount = newMounts;
+    }
+
+    public String mountainPrinter() {
+        return "Mountains " + toString() + " and " + numOfMount + " Mountains";
+    }
+
+    public String toStringMount() {
+        return toString() + " and " + numOfMount + " Mountains";
+    }
+
+}
+/**
+ * Makes Desert Mountains from two superclasses
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+
+public class MountainDesert extends Desert {
+    private int elevation;
+
+    public MountainDesert(int l, int w, int water, int elevation) {
+        super(l, w, water);
+        this.elevation = elevation;
+    }
+
+    public int getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(int elevation) {
+        this.elevation = elevation;
+    }
+
+    public String mountDesertPrinter() {
+        return "Mountain Desert " + toStringDes() + " and " + elevation + " feet high";
+    }
+
+}
+
+/**
+ * This is the father all of the other classes inhert from
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+
+public class Terrain {
+    // instance variables
+    private int length, width;
+
+    // Constructor for objects of class Terrain
+    public Terrain(int l, int w) {
+        // initialize instance variables
+        length = l;
+        width = w;
+    }
+
+    public String getTerrainSize() {
+        return "Terrain has dimensions " + length + " X " + width;
+    }
+
+    public String toString() {
+        return "has dimensions " + length + " X " + width;
+    }
+}/**
+ * Creates WinterMountain objects through the Mountain class
+ *
+ * @author Jose Reynaldo
+ * @version 23/3/23
+ */
+public class WinterMountain extends Mountain {
+    private int temp;
+
+    public WinterMountain(int l, int w, int numOfMount, int temp) {
+        super(l, w, numOfMount);
+        this.temp = temp;
+    }
+
+    public int getTemp() {
+        return temp;
+    }
+
+    public void setTemp(int newTemp) {
+        temp = newTemp;
+    }
+
+    public String winterPrinter() {
+        return "Winter Mountains " + toStringMount() + " and is " + temp + " Degrees";
+    }
+}

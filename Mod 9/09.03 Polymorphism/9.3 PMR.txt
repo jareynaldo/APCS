@@ -1,0 +1,160 @@
++ I was able to succesfullt impliment the Circle2 class object arraylist 
+and ensure a proper put. 
+- I had no real issues when exceuting. 
+(+) I gained the recognition that you can create arrays of subclass 
+object and am sure I will use them later on when I create larger 
+subclass arrays for much more flexability. 
+
+
+import java.util.ArrayList;
+
+// This class creats and arraylist of Circle2 objects and outputs them. 
+// @author Jose Reynaldo
+// @version 24/3/23 
+
+public class ShapeTester {
+    public static void main(String[] args) {
+        Circle2 one = new Circle2(26, 34, 20);
+        Circle2 two = new Oval2(42, 34, 4, 6);
+        Circle2 three = new Cylinder2(50, 34, 20, 20);
+        Circle2 four = new OvalCylinder2(34, 34, 4, 5, 20);
+
+        ArrayList<Circle2> list = new ArrayList<>();
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        list.add(four);
+
+        showCenter(list);
+    }
+
+    public static void showCenter(ArrayList<Circle2> obs) {
+
+        for (Circle2 object : obs) {
+            System.out.printf("%s %s %s%s \n", "For this ",
+                    object.getname(), " the center is at ", object.getCenter());
+        }
+    };
+}
+
+
+/**
+ * This class defines an Oval Cylinder object that extends an Oval.
+ *
+ * @author Jose Reynaldo
+ * @version 24/3/23
+ */
+
+public class OvalCylinder2 extends Oval2 {
+    // instance variables
+    private int height;
+
+    // Constructor for objects of class OvalCylinder
+    public OvalCylinder2(int x, int y, int rad1, int rad2, int h) {
+        // call superclass
+        super(x, y, rad1, rad2);
+
+        // initialize instance variables
+        height = h;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getname() {
+        return "OvalCylinder2";
+    }
+}
+
+/**
+ * This class defines an Oval object by extending Circle.
+ *
+ * @author Jose Reynaldo
+ * @version 24/3/23
+ */
+
+public class Oval2 extends Circle2 {
+    // instance variables
+    private int radius2;
+
+    // Constructor for objects of class Oval
+    public Oval2(int x, int y, int rad1, int rad2) {
+        // call superclass
+        super(x, y, rad1);
+
+        // initialize instance variables
+        radius2 = rad2;
+    }
+
+    public int getRadius2() {
+        return radius2;
+    }
+
+    public String getname() {
+        return "OvalCylender2";
+    }
+}
+
+
+/**
+ * This class defines a Cylinder object by extending a Circle.
+ *
+ * @author Jose Reynaldo
+ * @version 24/3/23
+ */
+
+public class Cylinder2 extends Circle2 {
+    // instance variables
+    private int height;
+
+    // Constructor for objects of class Cylinder
+    public Cylinder2(int x, int y, int rad, int h) {
+        // call superclass
+        super(x, y, rad);
+
+        // initialize instance variables
+        height = h;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getname() {
+        return "Cylinder2";
+    }
+}
+
+/**
+ * This class defines a Circle object.
+ * 
+ * @author Jose Reynaldo
+ * @version 24/3/23
+ */
+
+public class Circle2 {
+    private int x;
+    private int y;
+    private int radius;
+
+    // Constructor for objects of class Circle
+    public Circle2(int p_x, int p_y, int r) {
+        x = p_x;
+        y = p_y;
+        radius = r;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    // Concatenates a String to show the center x, y point of the circle
+    public String getCenter() {
+        return "center is at (" + x + ", " + y + ")";
+    }
+
+    public String getname() {
+        return "Circle2";
+    }
+}
