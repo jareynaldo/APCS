@@ -1,0 +1,162 @@
++ I was able to succesfully create all of the extra 
+classes and print them out correctly. 
+
+- I am super lost on the equals method. I looked through 
+all of the resources and I cannot find it anywhere and 
+have no idea how i'm supposed to impliment it. 
+
+(+) In this project I learned how to use overloading to 
+allow for individualized outputs and experinces for each 
+class. 
+
+
+//This class defines a Box object by extending
+//Rectangle and includes height.
+//
+//@author Jose Reynaldo
+// @version 06/13/17
+
+public class Box4 extends Rectangle4 {
+    private int height;
+
+    public Box4(int l, int w, int h) {
+        super(l, w);
+
+        height = h;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String toString() {
+        return "The box's dimensions are " + getLength() + " X " + getWidth() + " X " + height;
+    }
+
+}
+
+
+//This class defines a Cube object by extending
+//box which includes height.
+//
+//
+//@author Jose Reynaldo
+// @version 27/3/23
+
+public class Cube4 extends Box4 {
+
+    public Cube4(int x) {
+        super(x, x, x);
+
+    }
+
+    public String toString() {
+        return "The Cube's dimensions are " + getLength() + " X " + getWidth() + " X " + getHeight();
+    }
+
+}
+// this class defines a kite object by using
+// the rectangle4 class. 
+//
+//
+//@author Jose Reynaldo
+// @version 27/3/23
+
+public class kite4 extends Rectangle4 {
+    public kite4(int x, int y) {
+        super(x, y);
+    }
+
+    public String toString() {
+        return "The kite's dimensions are " + getLength() + " X " + getWidth();
+
+    }
+}
+
+/**
+ * This class defines a Rectangle object using
+ * length and width.
+ * The toString method has been added.
+ *
+ *
+ * @author Jose Reynaldo
+ * @version 27/3/23
+ */
+public class Rectangle4 {
+    private int length;
+    private int width;
+
+    public Rectangle4(int l, int w) {
+        length = l;
+        width = w;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String toString() {
+        return "The rectangle's dimensions are " + length + " X " + width;
+    }
+
+}
+
+// this class was created to test overide methods
+//
+//
+//@author Jose Reynaldo
+// @version 27/3/23
+import java.util.*;
+
+public class ShapesTester4 {
+    public static void main(String[] args) {
+        Rectangle4 one = new Rectangle4(5, 8);
+        Rectangle4 two = new Box4(4, 10, 8);
+        Rectangle4 three = new Square4(5);
+        Rectangle4 four = new Cube4(8);
+        Rectangle4 five = new kite4(6, 10);
+
+        // Print all shapes
+        ArrayList<Rectangle4> shapes = new ArrayList<Rectangle4>();
+
+        shapes.add(one);
+        shapes.add(two);
+        shapes.add(three);
+        shapes.add(four);
+        shapes.add(five);
+
+        for (Rectangle4 rect : shapes) {
+            // System.out.println(rect);
+            showEffectBoth(rect);
+            System.out.println();
+        }
+    }
+
+    public static void showEffectBoth(Rectangle4 r) {
+        System.out.println(r);
+    }
+
+}
+
+//This class defines a square object by extending
+//Rectangle class.
+//
+//@author Jose Reynaldo
+// @version 27/3/23
+
+public class Square4 extends Rectangle4 {
+
+    public Square4(int l) {
+        super(l, l);
+
+    }
+
+    public String toString() {
+        return "The square's dimensions are " + getLength() + " X " + getWidth() + " X ";
+    }
+
+}
