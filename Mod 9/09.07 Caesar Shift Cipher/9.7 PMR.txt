@@ -1,0 +1,213 @@
++ I was able to use all of the new topics that we have covered 
+except inheritance in this program. Except as I write this I realize 
+that I could have just made decryption a subclass of encryption and 
+saved me time. Such is life, but at least now I know i'll be sure to 
+save me that trouble and actually use inheritance. 
+
+- This project was a significant challenge. Even when provided with 
+the pseudocode, it still took me quite a bit of work and slams against 
+my desk in order to get this project to work as expected. The main 
+causer of my problems originally became the encryption method, as I 
+did not thoroughly read the instructions and was attempting to get 
+this project done using an array of chars and trying to use ascii 
+values. That was not fun, but I was able to solve one problem at a 
+time and get it complete. 
+
+(+) In this project I practiced working with class level variables, 
+constant and not, using static methods from different classes, and 
+even inheritance had I actually done this project as it was intended 
+to be done. 
+
+
+
+
+
+
+
+
+
+
+// The purpose of this program is to test the 
+//encryption and decryption classes. 
+//
+// By: Jose Reynaldo
+// Date: 29/3/23
+
+import java.util.Scanner;
+
+public class CaesarTester {
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        boolean choice = true;
+
+        while (choice) {
+            System.out.println("\n Encrypt, Decrypt, or Quit?");
+            String encryptChoice = in.nextLine();
+
+            if (encryptChoice.equalsIgnoreCase("Encrypt")) {
+                int shiftValue = AskForShift();
+                Encryption.shifting(shiftValue);
+                Encrypt();
+            } else if (encryptChoice.equalsIgnoreCase("Decrypt")) {
+                int shiftValue = AskForShift();
+                String valueToSend = "";
+
+                System.out.println("Is it already encrypted? (yes/no)");
+                String response = in.nextLine();
+
+                if (response.equalsIgnoreCase("Yes")) {
+                    System.out.println("Paste the encrypted message: ");
+                    valueToSend = in.nextLine();
+
+                } else {
+                    valueToSend = Encrypt();
+                }
+
+                String phrase = Decryption.Decrypt(shiftValue, valueToSend);
+                System.out.print("Your de-crypted phrase:  " + phrase + "\n");
+            } else if (encryptChoice.equalsIgnoreCase("quit")) {
+                choice = false;
+            }
+
+        }
+
+    }
+
+    public static String Encrypt() {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("What is the message?");
+        String message = in.nextLine();
+
+        String phrase = Encryption.Encrypt(message);
+        System.out.println("Your encrypted phrase:  " + phrase);
+
+        return phrase;
+    }
+
+    public static int AskForShift() {
+        Scanner in = new Scanner(System.in);
+        int shiftValue;
+
+        System.out.println("Shift key? 25 max");
+        shiftValue = in.nextInt();
+        in.nextLine();
+
+        while (shiftValue > 25) {
+            System.out.println("Please remain under 25");
+            shiftValue = in.nextInt();
+            in.nextLine();
+        }
+        return shiftValue;
+    }
+
+}
+
+// The purpose of this program is to create the 
+// Encryption class in order to encrypt messages
+//
+// By: Jose Reynaldo
+// Date: 29/3/23
+
+public class Encryption {
+
+    // public static final char[] alphabet = { 'A', 'B', 'C', 'D', 'E', 'F', 'G',
+    // 'H', 'I',
+    // 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+    // 'Y', 'Z' };
+
+    public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I",
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+    public static int shiftValue;
+    public static String[] newARR = new String[alphabet.length];
+
+    public static void shifting(int shifter) {
+        shiftValue = shifter;
+
+        int adding = 0;
+        for (int i = shiftValue - 1; i < alphabet.length; i++) {
+            newARR[adding] = alphabet[i];
+            adding++;
+        }
+        for (int i = 0; i < shiftValue - 1; i++) {
+            newARR[adding] = alphabet[i];
+            adding++;
+        }
+
+    }
+
+    public static String Encrypt(String phrase) {
+        phrase = phrase.toUpperCase();
+        String[] messageTop = phrase.split(" ");
+
+        String returnMessage = "";
+        for (String mess : messageTop) {
+            String[] message = mess.split("");
+            for (int i = 0; i < message.length; i++) {
+                for (int x = 0; x < alphabet.length; x++) {
+                    if (alphabet[x].equals(message[i])) {
+                        returnMessage += newARR[x];
+                    }
+
+                }
+            }
+            returnMessage += " ";
+        }
+        return returnMessage;
+
+    }
+
+}
+// The purpose of this program is to create the 
+// Decryption class in order to decrypt messages
+//
+// By: Jose Reynaldo
+// Date: 29/3/23
+
+public class Decryption {
+    public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I",
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+    public static int shiftValue;
+    public static String[] newARR = new String[alphabet.length];
+
+    public static void shifter(int shifter) {
+        shiftValue = shifter;
+
+        int adding = 0;
+        for (int i = shiftValue - 1; i < alphabet.length; i++) {
+            newARR[adding] = alphabet[i];
+            adding++;
+        }
+        for (int i = 0; i < shiftValue - 1; i++) {
+            newARR[adding] = alphabet[i];
+            adding++;
+        }
+
+    }
+
+    public static String Decrypt(int shifter, String phrase) {
+        phrase = phrase.toUpperCase();
+        String[] messageTop = phrase.split(" ");
+
+        shifter(shifter);
+
+        String returnMessage = "";
+        for (String mess : messageTop) {
+            String[] message = mess.split("");
+            for (int i = 0; i < message.length; i++) {
+                for (int x = 0; x < alphabet.length; x++) {
+                    if (newARR[x].equals(message[i])) {
+                        returnMessage += alphabet[x];
+                    }
+
+                }
+            }
+            returnMessage += " ";
+        }
+        return returnMessage;
+
+    }
+
+}
